@@ -1,26 +1,26 @@
 # See: https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "asimov-template-module"
+name = "asimov-solana-module"
 version = "0.0.0"
 authors = ["ASIMOV Community"]
 edition = "2024"
 #rust-version = "1.85"
-description = "ASIMOV module."
-#documentation = "https://docs.rs/asimov-template-module"
+description = "ASIMOV module for data import from the Solana blockchain network."
+#documentation = "https://docs.rs/asimov-solana-module"
 readme = true
 homepage = "https://github.com/asimov-modules"
-repository = "https://github.com/asimov-modules/asimov-template-module"
+repository = "https://github.com/asimov-modules/asimov-solana-module"
 license = "Unlicense"
-keywords = ["asimov-module", "asimov", "ai"]
-categories = ["command-line-utilities", "text-processing"]              # TODO
+keywords = ["asimov-module", "asimov", "solana", "blockchain", "ai"]
+categories = ["command-line-utilities", "text-processing"]
 publish = false
 
 [features]
 default = ["all", "cli", "std"]
 all = ["pretty", "tracing"]
 cli = ["asimov-module/cli", "std", "dep:clap", "dep:clientele"]
-std = ["asimov-module/std", "clap?/std", "clientele?/std"]
+std = ["asimov-module/std", "clap?/std", "clientele?/std", "dep:ureq", "dep:serde_json"]
 unstable = []
 
 # Optional features:
@@ -29,6 +29,7 @@ tracing = ["asimov-module/tracing", "clientele?/tracing"]
 
 [dependencies]
 asimov-module = { version = "25.0.0-dev.21", default-features = false }
+url = { version = "2", default-features = false }
 
 # Optional integrations:
 clap = { version = "4.5", default-features = false, features = [
@@ -38,6 +39,8 @@ clientele = { version = "0.3.8", default-features = false, features = [
   "clap",
   "std",
 ], optional = true }
+ureq = { version = "3", optional = true }
+serde_json = { version = "1", optional = true }
 
 [profile.release]
 opt-level = "z"
@@ -45,6 +48,6 @@ strip = true
 lto = "thin"
 
 [[bin]]
-name = "asimov-template-emitter"
-path = "src/emitter/main.rs"
+name = "asimov-solana-fetcher"
+path = "src/fetcher/main.rs"
 required-features = ["cli"]

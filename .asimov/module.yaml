@@ -1,20 +1,25 @@
 # See: https://asimov-specs.github.io/module-manifest/
 ---
-name: template
-label: Template
-title: ASIMOV Template Module
-summary: Fork this to create your own module!
+name: solana
+label: Solana
+title: ASIMOV Solana Module
+summary: Imports structured data from the Solana blockchain network.
 links:
-  - https://github.com/asimov-modules/asimov-template-module
-  - https://crates.io/crates/asimov-template-module
+  - https://github.com/asimov-modules/asimov-solana-module
+  - https://crates.io/crates/asimov-solana-module
 
 provides:
   programs:
-    - asimov-template-emitter
+    - asimov-solana-fetcher
 
 handles:
   url_protocols:
+    - solana
   url_prefixes:
+    - "solana://mainnet/"
+    - "solana://devnet/"
+    - "solana://testnet/"
   url_patterns:
+    - "solana://*/*"
   file_extensions:
   content_types:
